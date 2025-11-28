@@ -4,9 +4,12 @@ import streamlit as st
 from sources.utils import compile_dataframe
 from targets.utils import make_form_url_from_series, make_form_url_from_plate
 
-with st.sidebar:
-    st.markdown("Find your favorite plate!")
+plate_search, desc_search = st.columns(2)
+
+with plate_search:
     plate_search_string = st.text_input("Plate").upper()
+
+with desc_search:
     vehicle_search_string = st.text_input("Vehicle").upper()
 
 melt_plates_df = compile_dataframe(st.secrets.sources)

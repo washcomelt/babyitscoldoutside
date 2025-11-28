@@ -1,6 +1,7 @@
 import pandas as pd
 from pprint import pprint
 
+
 def make_google_export_url(source_dict: dict) -> str:
 
     base_url = "https://docs.google.com/spreadsheets/d"
@@ -27,8 +28,6 @@ def make_dataframe_from_source(source_dict: dict) -> pd.DataFrame:
     }
 
     df = pd.read_csv(download_url)
-
-    #TODO: DROP COLUMNS not in schema dict
 
     df.rename(columns=rename_dict, errors="raise", inplace=True)
 
