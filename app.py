@@ -7,10 +7,10 @@ from targets.utils import make_form_url_from_series, make_form_url_from_plate
 plate_search, desc_search = st.columns(2)
 
 with plate_search:
-    plate_search_string = st.text_input("Plate").upper()
+    plate_search_string = st.text_input("Plate", help="Enter _complete_ plate for 'New Plate' submission button").upper()
 
 with desc_search:
-    vehicle_search_string = st.text_input("Vehicle").upper()
+    vehicle_search_string = st.text_input("Vehicle", help="Search Vehicle Description").upper()
 
 st.caption("Use the above fields to search.")
 
@@ -40,6 +40,7 @@ if melt_plates_df.shape[0] > 0:
         selection_mode="single-row",
         hide_index=True,
     )
+
     if len(event.selection.rows) > 0:
 
         selected = event.selection.rows
@@ -52,7 +53,7 @@ if melt_plates_df.shape[0] > 0:
             st.dataframe(selected_df.transpose())
 
     else:
-        st.caption("select record for more info...")
+        st.caption("select record for more info and form submittions button...")
 
 else:
     st.text("No matching records")
