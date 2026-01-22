@@ -40,7 +40,7 @@ def make_dataframe_from_source(source_dict: dict) -> pd.DataFrame:
 
     df.rename(columns=rename_dict, errors="raise", inplace=True)
 
-    df["Plate"] = df["Plate"].str.upper()
+    df["Plate"] = df["Plate"].str.upper().str.strip()
 
     df["Make"] = df["Make"].str.capitalize()
     df["Model"] = df["Model"].str.capitalize()

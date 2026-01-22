@@ -19,7 +19,7 @@ melt_plates_df = compile_dataframe(st.secrets.sources)
 
 melt_plates_df = melt_plates_df[
     (
-        melt_plates_df["Plate"].str.upper().str.contains(plate_search_string, na=False)
+        melt_plates_df["Plate"].str.upper().str.contains(plate_search_string.strip(), na=False)
         & melt_plates_df["Vehicle"]
         .str.upper()
         .str.contains(vehicle_search_string, na=False)
@@ -29,7 +29,7 @@ melt_plates_df = melt_plates_df[
 name = st.query_params.get("name","")
 
 if melt_plates_df.shape[0] > 0:
-
+    
     event = st.dataframe(
         melt_plates_df,
         column_order=("Timestamp", "State_Plate", "Vehicle"),
@@ -42,6 +42,12 @@ if melt_plates_df.shape[0] > 0:
         selection_mode="single-row",
         hide_index=True,
     )
+
+    info_str = """
+      Please use your obeservations on the gound
+      to verify identities as rentals have been used
+    """
+    st.info(info_str)
 
     if len(event.selection.rows) > 0:
 
